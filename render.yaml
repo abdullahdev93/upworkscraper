@@ -1,7 +1,10 @@
 services:
   - type: worker
-    name: upwork-alert-bot
-    runtime: python
-    buildCommand: ./render-build.sh
-    startCommand: python upwork_scraper.py
+    name: upwork-alert-bot-docker
+    env: docker
+    plan: starter
+    branch: main
     autoDeploy: false
+    envVars:
+      - key: SLACK_WEBHOOK_URL
+        sync: false
