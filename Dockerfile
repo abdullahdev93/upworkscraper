@@ -1,17 +1,11 @@
-FROM python:3.12-slim
+FROM mcr.microsoft.com/playwright/python:v1.43.1-focal
 
-# Install dependencies
-RUN apt-get update && apt-get install -y wget gnupg curl unzip fonts-liberation libnss3 libatk1.0-0 libatk-bridge2.0-0 libxss1 libasound2 libx11-xcb1 libxcomposite1 libxdamage1 libxrandr2 libgbm1 libgtk-3-0 libxshmfence1 libxext6 libxfixes3 libdrm2 libglu1-mesa
+# Install dotenv and requests
+RUN pip install python-dotenv requests
 
-# Install pip dependencies
-COPY requirements.txt .
-RUN pip install -r requirements.txt
-
-# Install Playwright and Chromium
-RUN pip install playwright && playwright install chromium
-
-# Copy app files
+# Copy your app
+WORKDIR /app
 COPY . .
 
-# Start command
+# Run your script
 CMD ["python", "upwork_scraper.py"]
