@@ -21,7 +21,19 @@ def scrape_upwork():
     negative_keywords = load_keywords('negative_keywords.txt')
 
     with sync_playwright() as p:
-        browser = p.chromium.launch(headless=False, slow_mo=50)
+        browser = p.chromium.launch(
+            headless=True,
+            args=[
+                "--no-sandbox",
+                "--disable-gpu",
+                "--disable-dev-shm-usage",
+                "--disable-setuid-sandbox",
+                "--disable-extensions",
+                "--disable-infobars",
+                "--window-size=1920,1080",
+            ]
+        )
+
         page = browser.new_page()
         page.goto("https://www.upwork.com/nx/jobs/search/?q=unity%20OR%20unreal&sort=recency")
 
