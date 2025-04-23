@@ -19,7 +19,7 @@ def send_to_slack(message):
 def scrape_upwork():
     positive_keywords = load_keywords('positive_keywords.txt')
     negative_keywords = load_keywords('negative_keywords.txt')
-
+	print("✅ Launching Playwright")
     with sync_playwright() as p:
         browser = p.chromium.launch(
             headless=True,
@@ -31,9 +31,10 @@ def scrape_upwork():
         	"--disable-extensions",
         	"--disable-infobars",
         	"--window-size=1920,1080",
-        	"--use-gl=egl"
+        	"--use-gl=swiftshader"
             ]
         )
+	print("✅ Browser launched")
 
         page = browser.new_page()
         page.goto("https://www.upwork.com/nx/jobs/search/?q=unity%20OR%20unreal&sort=recency")
