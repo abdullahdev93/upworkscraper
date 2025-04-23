@@ -1,10 +1,12 @@
-FROM mcr.microsoft.com/playwright/python:v1.43.1-focal
+FROM mcr.microsoft.com/playwright/python:focal
 
 # Install dotenv and requests
 RUN pip install python-dotenv requests
 
-# Copy your app
+# Set working directory
 WORKDIR /app
+
+# Copy all files
 COPY . .
 
 # Run your script
