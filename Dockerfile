@@ -1,7 +1,7 @@
 FROM mcr.microsoft.com/playwright/python:focal
 
-# Install dotenv and requests
-RUN pip install python-dotenv requests
+# Install Python libraries
+RUN pip install python-dotenv requests playwright
 
 # Set working directory
 WORKDIR /app
