@@ -1,0 +1,9 @@
+services:
+  - type: worker
+    name: upwork-alert-bot
+    runtime: python
+    buildCommand: |
+      pip install -r requirements.txt
+      playwright install chromium
+    startCommand: python upwork_scraper.py
+    autoDeploy: false
