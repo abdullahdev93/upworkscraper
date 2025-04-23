@@ -25,12 +25,13 @@ def scrape_upwork():
             headless=True,
             args=[
                 "--no-sandbox",
-                "--disable-gpu",
-                "--disable-dev-shm-usage",
-                "--disable-setuid-sandbox",
-                "--disable-extensions",
-                "--disable-infobars",
-                "--window-size=1920,1080",
+        	"--disable-gpu",
+        	"--disable-dev-shm-usage",
+        	"--disable-setuid-sandbox",
+        	"--disable-extensions",
+        	"--disable-infobars",
+        	"--window-size=1920,1080",
+        	"--use-gl=egl"
             ]
         )
 
