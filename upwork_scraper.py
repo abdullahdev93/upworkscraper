@@ -1,3 +1,4 @@
+print("✅ Script is loading...")
 import os
 from dotenv import load_dotenv
 load_dotenv()
@@ -72,6 +73,7 @@ def scrape_upwork():
         print("✅ Browser closed")
 
 if __name__ == "__main__":
+    print("🚀 Entering main loop")
     while True:
         scrape_upwork()
-        time.sleep(600)  # Check every 10 minutes
+        time.sleep(600)
