@@ -9,6 +9,8 @@ SLACK_WEBHOOK_URL = os.getenv("SLACK_WEBHOOK_URL")
 if not SLACK_WEBHOOK_URL:
     print("❌ SLACK_WEBHOOK_URL is missing! Check your Render environment variables.")
 
+print("✅ Script started and running.")
+
 def load_keywords(file_path):
     with open(file_path, 'r') as f:
         return [line.strip().lower() for line in f if line.strip()]
@@ -24,20 +26,24 @@ def scrape_upwork():
 
     print("✅ Launching Playwright")
     with sync_playwright() as p:
-        browser = p.chromium.launch(
-            headless=True,
-            args=[
-                "--no-sandbox",
-                "--disable-gpu",
-                "--disable-dev-shm-usage",
-                "--disable-setuid-sandbox",
-                "--disable-extensions",
-                "--disable-infobars",
-                "--window-size=1920,1080",
-                "--use-gl=swiftshader"
-            ]
-        )
-        print("✅ Browser launched")
+        try:
+            browser = p.chromium.launch(
+                headless=True,
+                args=[
+                    "--no-sandbox",
+                    "--disable-gpu",
+                    "--disable-dev-shm-usage",
+                    "--disable-setuid-sandbox",
+                    "--disable-extensions",
+                    "--disable-infobars",
+                    "--window-size=1920,1080",
+                    "--use-gl=swiftshader"
+                ]
+            )
+            print("✅ Browser launched")
+        except Exception as e:
+            print("❌ Failed to launch browser:", e)
+            return
 
         page = browser.new_page()
         print("✅ Navigating to Upwork")
