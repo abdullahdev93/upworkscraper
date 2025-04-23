@@ -1,8 +1,12 @@
+import os
+from dotenv import load_dotenv
+load_dotenv()
 import requests
 import time
 from playwright.sync_api import sync_playwright
 
-SLACK_WEBHOOK_URL = 'https://hooks.slack.com/services/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'
+SLACK_WEBHOOK_URL = os.getenv("SLACK_WEBHOOK_URL")
+
 
 def load_keywords(file_path):
     with open(file_path, 'r') as f:
