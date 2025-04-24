@@ -1,13 +1,16 @@
 FROM mcr.microsoft.com/playwright/python:focal
 
-# Install Python libraries
+# Install dependencies
 RUN pip install python-dotenv requests playwright
 
 # Set working directory
 WORKDIR /app
 
-# Copy all files
+# Copy files
 COPY . .
 
-# Run your script
-CMD ["python", "upwork_scraper.py"]
+# Print file list to verify visibility
+RUN ls -la /app
+
+# Force Python to run in unbuffered, verbose mode
+CMD ["python", "-u", "upwork_scraper.py"]
