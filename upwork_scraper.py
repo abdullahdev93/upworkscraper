@@ -63,8 +63,8 @@ try:
                 print("✅ Navigating to Upwork")
                 page.goto("https://www.upwork.com/nx/jobs/search/?q=unity%20OR%20unreal&sort=recency")
 
-                page.wait_for_selector('a[data-test="job-tile-title-link UpLink"]', timeout=20000)
-                job_posts = page.query_selector_all('a[data-test="job-tile-title-link UpLink"]')
+                page.wait_for_selector('section[data-test="JobTile"] a[data-test^="job-tile-title-link"]', timeout=30000)
+                job_posts = page.query_selector_all('section[data-test="JobTile"] a[data-test^="job-tile-title-link"]')
                 print(f"✅ Found {len(job_posts)} job posts")
 
                 for post in job_posts:
