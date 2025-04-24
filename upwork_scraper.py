@@ -58,21 +58,16 @@ def scrape_upwork():
             return
 
         try:
-            page = browser.new_page()
+            context = browser.new_context(user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36")
+            page = context.new_page()
             print("✅ Navigating to Upwork")
-            page.goto("https://www.upwork.com/nx/jobs/search/?q=unity%20OR%20unreal&sort=recency")
+            page.goto("https://www.upwork.com/nx/jobs/search/?q=unity%20OR%20unreal&sort=recency", wait_until="networkidle", timeout=60000)
 
             print(f"📄 Page title: {page.title()}")
             print(f"🔗 Current URL: {page.url}")
+            page.screenshot(path="page.png", full_page=True)
+            print("📸 Screenshot saved as page.png")
 
-            # Save screenshot before waiting
-            try:
-                page.screenshot(path="page.png", full_page=True)
-                print("📸 Screenshot saved as page.png")
-            except Exception as e:
-                print(f"⚠️ Screenshot failed: {e}")
-
-            # Wait for job posts
             page.wait_for_selector('section[data-test="JobTile"] a[data-test^="job-tile-title-link"]', timeout=30000)
             print("✅ Job posts selector appeared")
 
